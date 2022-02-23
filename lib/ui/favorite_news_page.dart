@@ -5,6 +5,13 @@ class FavoriteNewsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Favorite News"),
+      ),
+      body: const Center(
+        child: Text("Coming soon"),
+      ),
+    );
   }
 }

@@ -3,16 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:news_app/data/model/news_data.dart';
 
-class NewsCard extends StatelessWidget {
+class NewsAppBar extends StatelessWidget {
   final Article article;
 
-  const NewsCard({Key? key, required this.article}) : super(key: key);
+  const NewsAppBar({Key? key, required this.article}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    var width = MediaQuery.of(context).size.width;
     return SliverAppBar(
-      expandedHeight: 400.h,
+      backgroundColor: Colors.white,
+      expandedHeight: 300.h,
       flexibleSpace: FlexibleSpaceBar(
         background: Column(
           children: [
@@ -21,7 +21,7 @@ class NewsCard extends StatelessWidget {
                     child: const Center(
                       child: Icon(Icons.error),
                     ),
-                    width: width,
+                    width: 1.sw,
                     height: 298.h,
                   )
                 : Stack(
@@ -31,27 +31,27 @@ class NewsCard extends StatelessWidget {
                         //     context, DetailNewsPage.routeName,
                         //     arguments: article),
                         child: CachedNetworkImage(
-                          height: 298.h,
-                          width: width,
+                          height: 200.h,
+                          width: 1.sw,
                           imageUrl: article.urlToImage!,
-                          fit: BoxFit.contain,
+                          fit: BoxFit.cover,
                           placeholder: (context, url) => SizedBox(
                             child: const Center(
                                 child: CircularProgressIndicator()),
-                            height: 298.h,
-                            width: width,
+                            height: 200.h,
+                            width: 1.sw,
                           ),
                           errorWidget: (context, url, error) => SizedBox(
                             child: const Center(
                               child: Icon(Icons.error),
                             ),
-                            width: width,
-                            height: 298.h,
+                            width: 1.sw,
+                            height: 200.h,
                           ),
                         ),
                       ),
                       Align(
-                        alignment: Alignment.topRight,
+                        alignment: Alignment.topLeft,
                         child: Card(
                           margin: const EdgeInsets.all(0),
                           shape: const BeveledRectangleBorder(
@@ -73,8 +73,8 @@ class NewsCard extends StatelessWidget {
                   ),
             Container(
               padding: const EdgeInsets.all(5),
-              height: 100.h,
-              width: width,
+              height: 90.h,
+              width: 1.sw,
               child: Center(
                 child: Text(
                   article.title ?? "",

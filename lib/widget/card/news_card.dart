@@ -12,20 +12,31 @@ class NewsCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
       child: ListTile(
-        contentPadding:
-            const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 16.0,
+          vertical: 8.0,
+        ),
         leading: article.urlToImage == null
             ? SizedBox(
-                width: 200.w,
-                child: const Center(child: Icon(Icons.error)),
+                width: 100.w,
+                child: const Center(
+                  child: Icon(
+                    Icons.error,
+                  ),
+                ),
               )
             : CachedNetworkImage(
                 imageUrl: article.urlToImage!,
-                width: 200.w,
-                placeholder: (context, url) =>
-                    const Center(child: CircularProgressIndicator()),
-                errorWidget: (context, url, error) =>
-                    const Center(child: Icon(Icons.error)),
+                width: 100.w,
+                fit: BoxFit.fill,
+                placeholder: (context, url) => const Center(
+                  child: CircularProgressIndicator(),
+                ),
+                errorWidget: (context, url, error) => const Center(
+                  child: Icon(
+                    Icons.error,
+                  ),
+                ),
               ),
         title: Text(
           article.title ?? "",
