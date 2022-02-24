@@ -1,51 +1,62 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:news_app/bloc/home/home_bloc.dart';
+import 'package:news_app/bloc/home/home_event.dart';
 import 'package:news_app/ui/favorite_news_page.dart';
 import 'package:news_app/ui/news_list_page.dart';
 import 'package:news_app/utils/strings/strings%20constants.dart';
 
-class HomePage extends StatefulWidget {
-  static const routeName = '/home_page';
-
+class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
-  _HomePageState createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  int _bottomNavIndex = 0;
-
-  final List<Widget> _listWidget = [
-    const NewsListPage(),
-    const FavoriteNewsPage(),
-  ];
-
-  final List<BottomNavigationBarItem> _bottomNavBarItems = [
-    const BottomNavigationBarItem(
-      icon: Icon(Icons.public),
-      label: StringConstants.news,
-    ),
-    const BottomNavigationBarItem(
-      icon: Icon(Icons.star),
-      label: StringConstants.favorite,
-    ),
-  ];
-
-  void _onBottomNavTapped(int index) {
-    setState(() {
-      _bottomNavIndex = index;
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: _listWidget[_bottomNavIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _bottomNavIndex,
-        items: _bottomNavBarItems,
-        onTap: _onBottomNavTapped,
-      ),
+    return BlocBuilder<HomeBloc, int>(
+      builder: (context, state) {
+        return Scaffold(
+          body: SizedBox(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            child: IndexedStack(
+              index: context.read<HomeBloc>().state,
+              children: const [
+                NewsListPage(),
+                FavoriteNewsPage(),
+              ],
+            ),
+          ),
+          bottomNavigationBar: Container(
+            decoration: const BoxDecoration(
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black38,
+                  spreadRadius: 0,
+                  blurRadius: 10,
+                ),
+              ],
+            ),
+            child: BottomNavigationBar(
+              showUnselectedLabels: true,
+              showSelectedLabels: true,
+              onTap: (value) {
+                context.read<HomeBloc>().add(ChangeTabEvent(state: value));
+              },
+              currentIndex: context.read<HomeBloc>().state,
+              type: BottomNavigationBarType.fixed,
+              items: const <BottomNavigationBarItem>[
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.public),
+                  label: StringConstants.news,
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.star),
+                  label: StringConstants.favorite,
+                ),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }

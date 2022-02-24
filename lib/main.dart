@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:news_app/bloc/home/home_bloc.dart';
 import 'package:news_app/ui/home_page.dart';
 
 void main() {
@@ -26,7 +28,12 @@ class MyApp extends StatelessWidget {
             child: widget!,
           );
         },
-        home: const HomePage(),
+        home: BlocProvider<HomeBloc>(
+          create: (_) => HomeBloc(
+            initialState: 0,
+          ),
+          child: HomePage(),
+        ),
       ),
     );
   }
