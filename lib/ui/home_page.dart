@@ -4,8 +4,6 @@ import 'package:news_app/ui/news_list_page.dart';
 import 'package:news_app/utils/strings/strings%20constants.dart';
 
 class HomePage extends StatefulWidget {
-  static const routeName = '/home_page';
-
   const HomePage({Key? key}) : super(key: key);
 
   @override
@@ -14,22 +12,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _bottomNavIndex = 0;
-
-  final List<Widget> _listWidget = [
-    const NewsListPage(),
-    const FavoriteNewsPage(),
-  ];
-
-  final List<BottomNavigationBarItem> _bottomNavBarItems = [
-    const BottomNavigationBarItem(
-      icon: Icon(Icons.public),
-      label: StringConstants.news,
-    ),
-    const BottomNavigationBarItem(
-      icon: Icon(Icons.star),
-      label: StringConstants.favorite,
-    ),
-  ];
 
   void _onBottomNavTapped(int index) {
     setState(() {
@@ -40,11 +22,44 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _listWidget[_bottomNavIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _bottomNavIndex,
-        items: _bottomNavBarItems,
-        onTap: _onBottomNavTapped,
+      body: SizedBox(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        child: IndexedStack(
+          index: _bottomNavIndex,
+          children: const [
+            NewsListPage(),
+            FavoriteNewsPage(),
+          ],
+        ),
+      ),
+      bottomNavigationBar: Container(
+        decoration: const BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black38,
+              spreadRadius: 0,
+              blurRadius: 10,
+            ),
+          ],
+        ),
+        child: BottomNavigationBar(
+          showUnselectedLabels: true,
+          showSelectedLabels: true,
+          onTap: _onBottomNavTapped,
+          currentIndex: _bottomNavIndex,
+          type: BottomNavigationBarType.fixed,
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.public),
+              label: StringConstants.news,
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.star),
+              label: StringConstants.favorite,
+            ),
+          ],
+        ),
       ),
     );
   }
