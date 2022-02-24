@@ -20,40 +20,40 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       designSize: const Size(360, 690),
-      builder: () => MaterialApp(
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-          textTheme: TextTheme(button: TextStyle(fontSize: 45.sp)),
+      builder: () => BlocProvider<HomeBloc>(
+        create: (_) => HomeBloc(
+          initialState: 0,
         ),
-        builder: (context, widget) {
-          ScreenUtil.setContext(context);
-          return MediaQuery(
-            data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
-            child: widget!,
-          );
-        },
-        home: BlocProvider<HomeBloc>(
-          create: (_) => HomeBloc(
-            initialState: 0,
+        child: MaterialApp(
+          title: 'Flutter Demo',
+          theme: ThemeData(
+            primarySwatch: Colors.blue,
+            textTheme: TextTheme(button: TextStyle(fontSize: 45.sp)),
           ),
-          child: const HomePage(),
+          builder: (context, widget) {
+            ScreenUtil.setContext(context);
+            return MediaQuery(
+              data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+              child: widget!,
+            );
+          },
+          home: const HomePage(),
+          navigatorKey: NavigationHelperImpl.navigatorKey,
+          onGenerateRoute: (RouteSettings settings) {
+            switch (settings.name) {
+              case NewsRoutes.home:
+                return MaterialPageRoute(builder: (_) => const HomePage());
+              case NewsRoutes.detailNews:
+                final article = settings.arguments as Article;
+                return MaterialPageRoute(
+                  builder: (_) => DetailNewsPage(article: article),
+                  settings: settings,
+                );
+              default:
+                return MaterialPageRoute(builder: (_) => const HomePage());
+            }
+          },
         ),
-        navigatorKey: NavigationHelperImpl.navigatorKey,
-        onGenerateRoute: (RouteSettings settings) {
-          switch (settings.name) {
-            case NewsRoutes.home:
-              return MaterialPageRoute(builder: (_) => const HomePage());
-            case NewsRoutes.detailNews:
-              final article = settings.arguments as Article;
-              return MaterialPageRoute(
-                builder: (_) => DetailNewsPage(article: article),
-                settings: settings,
-              );
-            default:
-              return MaterialPageRoute(builder: (_) => const HomePage());
-          }
-        },
       ),
     );
   }
