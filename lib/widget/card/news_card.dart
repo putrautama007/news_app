@@ -2,11 +2,16 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
 import 'package:news_app/data/model/news_data.dart';
+import 'package:news_app/router/news_router.dart';
+import 'package:news_app/utils/navigation/navigation_helper.dart';
 
 class NewsCard extends StatelessWidget {
   final Article article;
+  final NewsRouter _newsRouter = NewsRouterImpl(
+    navigationHelper: NavigationHelperImpl(),
+  );
 
-  const NewsCard({Key? key, required this.article}) : super(key: key);
+  NewsCard({Key? key, required this.article}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -42,8 +47,9 @@ class NewsCard extends StatelessWidget {
           article.title ?? "",
         ),
         subtitle: Text(article.author ?? ""),
-        // onTap: () => Navigator.pushNamed(context, DetailNewsPage.routeName,
-        //     arguments: article),
+        onTap: () => _newsRouter.navigateToDetailNews(
+          article: article,
+        ),
       ),
     );
   }
