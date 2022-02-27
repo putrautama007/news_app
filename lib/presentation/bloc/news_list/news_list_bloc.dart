@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:news_app/bloc/news_list/news_list_event.dart';
-import 'package:news_app/bloc/news_list/news_list_state.dart';
+import 'package:news_app/presentation/bloc/news_list/news_list_event.dart';
+import 'package:news_app/presentation/bloc/news_list/news_list_state.dart';
 import 'package:news_app/data/datasource/remote/news_datasource.dart';
 
 class NewsListBloc extends Bloc<NewsListEvent, NewsListState> {

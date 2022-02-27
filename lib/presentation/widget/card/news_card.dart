@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
 import 'package:news_app/data/model/news_data.dart';
-import 'package:news_app/router/news_router.dart';
+import 'package:news_app/domain/router/news_router.dart';
 import 'package:news_app/utils/navigation/navigation_helper.dart';
 
 class NewsCard extends StatelessWidget {

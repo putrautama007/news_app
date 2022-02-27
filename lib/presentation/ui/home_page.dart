@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:news_app/bloc/home/home_bloc.dart';
-import 'package:news_app/bloc/home/home_event.dart';
-import 'package:news_app/ui/favorite_news_page.dart';
-import 'package:news_app/ui/news_list_page.dart';
+import 'package:news_app/presentation/bloc/home/home_bloc.dart';
+import 'package:news_app/presentation/bloc/home/home_event.dart';
+import 'package:news_app/presentation/ui/favorite_news_page.dart';
+import 'package:news_app/presentation/ui/news_list_page.dart';
 import 'package:news_app/utils/strings/strings%20constants.dart';
 
 class HomePage extends StatelessWidget {
