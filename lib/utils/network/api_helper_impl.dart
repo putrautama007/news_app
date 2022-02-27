@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:news_app/network/api_helper.dart';
+import 'package:news_app/utils/network/api_helper.dart';
 import 'package:news_app/utils/strings/api_strings.dart';
 
 class ApiHelperImpl extends ApiHelper {

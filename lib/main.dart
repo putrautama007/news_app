@@ -7,7 +7,7 @@ import 'package:news_app/bloc/news_list/news_list_bloc.dart';
 import 'package:news_app/bloc/news_list/news_list_event.dart';
 import 'package:news_app/data/datasource/remote/news_datasource.dart';
 import 'package:news_app/data/model/news_data.dart';
-import 'package:news_app/network/api_helper_impl.dart';
+import 'package:news_app/utils/network/api_helper_impl.dart';
 import 'package:news_app/router/news_routes.dart';
 import 'package:news_app/ui/home_page.dart';
 import 'package:news_app/utils/navigation/navigation_helper.dart';
