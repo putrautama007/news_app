@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:news_app/data/datasource/remote/news_datasource.dart';
 import 'package:news_app/data/model/news_data.dart';
-import 'package:news_app/network/api_helper_impl.dart';
+import 'package:news_app/utils/network/api_helper_impl.dart';
 import 'package:news_app/widget/appbar/news_appbar.dart';
 import 'package:news_app/widget/card/news_card.dart';
 
