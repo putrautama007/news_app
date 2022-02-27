@@ -1,62 +1,49 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:news_app/data/datasource/remote/news_datasource.dart';
-import 'package:news_app/data/model/news_data.dart';
-import 'package:news_app/network/api_helper_impl.dart';
+import 'package:news_app/bloc/news_list/news_list_bloc.dart';
+import 'package:news_app/bloc/news_list/news_list_state.dart';
 import 'package:news_app/widget/appbar/news_appbar.dart';
 import 'package:news_app/widget/card/news_card.dart';
 
-class NewsListPage extends StatefulWidget {
+class NewsListPage extends StatelessWidget {
   const NewsListPage({Key? key}) : super(key: key);
 
-  @override
-  _NewsListPageState createState() => _NewsListPageState();
-}
-
-class _NewsListPageState extends State<NewsListPage> {
-  late Future<NewsData> _news;
-
-  @override
-  void initState() {
-    super.initState();
-    _news = NewsDataSource(
-      apiHelper: ApiHelperImpl(
-        dio: Dio(),
-      ),
-    ).getListNews();
-  }
-
   Widget _buildList() {
-    return FutureBuilder(
-      future: _news,
-      builder: (context, AsyncSnapshot<NewsData> snapshot) {
-        var state = snapshot.connectionState;
-        if (state != ConnectionState.done) {
-          return const Center(child: CircularProgressIndicator());
-        } else {
-          if (snapshot.hasData) {
-            List<Article> article = snapshot.data!.articles!;
-            return NestedScrollView(
-              headerSliverBuilder: (context, isScrolled) {
-                return [
-                  NewsAppBar(article: article[0]),
-                ];
+    return BlocBuilder<NewsListBloc, NewsListState>(
+      builder: (context, state) {
+        if (state is NewsListLoading) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        } else if (state is NewsListHasData) {
+          return NestedScrollView(
+            headerSliverBuilder: (context, isScrolled) {
+              return [
+                NewsAppBar(article: state.result[0]),
+              ];
+            },
+            body: ListView.separated(
+              separatorBuilder: (context, index) => Divider(height: 2.h),
+              shrinkWrap: true,
+              itemCount: state.result.length,
+              itemBuilder: (context, index) {
+                return NewsCard(article: state.result[index]);
               },
-              body: ListView.separated(
-                separatorBuilder: (context, index) => Divider(height: 2.h),
-                shrinkWrap: true,
-                itemCount: article.length,
-                itemBuilder: (context, index) {
-                  return NewsCard(article: article[index]);
-                },
-              ),
-            );
-          } else if (snapshot.hasError) {
-            return Center(child: Text(snapshot.error.toString()));
-          } else {
-            return const Text('');
-          }
+            ),
+          );
+        } else if (state is NewsListError) {
+          return Center(
+            child: Text(
+              state.message,
+            ),
+          );
+        } else {
+          return const Center(
+            child: Text(
+              '',
+            ),
+          );
         }
       },
     );

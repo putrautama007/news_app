@@ -1,8 +1,13 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:news_app/bloc/home/home_bloc.dart';
+import 'package:news_app/bloc/news_list/news_list_bloc.dart';
+import 'package:news_app/bloc/news_list/news_list_event.dart';
+import 'package:news_app/data/datasource/remote/news_datasource.dart';
 import 'package:news_app/data/model/news_data.dart';
+import 'package:news_app/network/api_helper_impl.dart';
 import 'package:news_app/router/news_routes.dart';
 import 'package:news_app/ui/home_page.dart';
 import 'package:news_app/utils/navigation/navigation_helper.dart';
@@ -20,10 +25,25 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       designSize: const Size(360, 690),
-      builder: () => BlocProvider<HomeBloc>(
-        create: (_) => HomeBloc(
-          initialState: 0,
-        ),
+      builder: () => MultiBlocProvider(
+        providers: [
+          BlocProvider<HomeBloc>(
+            create: (_) => HomeBloc(
+              initialState: 0,
+            ),
+          ),
+          BlocProvider<NewsListBloc>(
+            create: (_) => NewsListBloc(
+              newsDataSource: NewsDataSource(
+                apiHelper: ApiHelperImpl(
+                  dio: Dio(),
+                ),
+              ),
+            )..add(
+                const LoadNewsList(),
+              ),
+          ),
+        ],
         child: MaterialApp(
           title: 'Flutter Demo',
           theme: ThemeData(
