@@ -37,6 +37,7 @@ dependencies:
   cached_network_image: ^3.2.0
   dio: ^4.0.4
   equatable: ^2.0.3
+  get_it: ^7.2.0
   flutter_bloc: ^8.0.1
   flutter_screenutil: ^5.3.1
 
