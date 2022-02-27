@@ -1,20 +1,18 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:news_app/bloc/home/home_bloc.dart';
 import 'package:news_app/bloc/news_list/news_list_bloc.dart';
 import 'package:news_app/bloc/news_list/news_list_event.dart';
-import 'package:news_app/data/datasource/remote/news_datasource.dart';
 import 'package:news_app/data/model/news_data.dart';
-import 'package:news_app/network/api_helper_impl.dart';
 import 'package:news_app/router/news_routes.dart';
 import 'package:news_app/ui/home_page.dart';
 import 'package:news_app/utils/navigation/navigation_helper.dart';
-
+import 'di/locator.dart' as di;
 import 'ui/detail_news_page.dart';
 
 void main() {
+  di.initDependency();
   runApp(const MyApp());
 }
 
@@ -34,11 +32,7 @@ class MyApp extends StatelessWidget {
           ),
           BlocProvider<NewsListBloc>(
             create: (_) => NewsListBloc(
-              newsDataSource: NewsDataSource(
-                apiHelper: ApiHelperImpl(
-                  dio: Dio(),
-                ),
-              ),
+              newsDataSource: di.locator(),
             )..add(
                 const LoadNewsList(),
               ),
