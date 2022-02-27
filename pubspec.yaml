@@ -35,6 +35,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   cached_network_image: ^3.2.0
+  dartz: ^0.10.1
   dio: ^4.0.4
   equatable: ^2.0.3
   get_it: ^7.2.0
