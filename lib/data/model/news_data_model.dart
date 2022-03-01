@@ -1,5 +1,5 @@
-class NewsData {
-  NewsData({
+class NewsDataModel {
+  NewsDataModel({
     this.status,
     this.totalResults,
     this.articles,
@@ -9,7 +9,7 @@ class NewsData {
   final int? totalResults;
   final List<Article>? articles;
 
-  factory NewsData.fromJson(Map<String, dynamic> json) => NewsData(
+  factory NewsDataModel.fromJson(Map<String, dynamic> json) => NewsDataModel(
     status: json["status"],
     totalResults: json["totalResults"],
     articles: List<Article>.from(json["articles"].map((x) => Article.fromJson(x))),
