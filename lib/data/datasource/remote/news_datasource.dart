@@ -1,4 +1,5 @@
-import 'package:news_app/data/model/news_data.dart';
+import 'package:news_app/data/model/news_data_model.dart';
+import 'package:news_app/utils/failure/exception.dart';
 import 'package:news_app/utils/network/api_helper.dart';
 import 'package:news_app/utils/strings/api_strings.dart';
 
@@ -9,7 +10,7 @@ class NewsDataSource {
     required this.apiHelper,
   });
 
-  Future<NewsData> getListNews() async {
+  Future<NewsDataModel> getListNews() async {
     try {
       final result = await apiHelper.get(
           url: "${ApiStrings.baseUrl}${ApiStrings.headlines}",
@@ -18,9 +19,9 @@ class NewsDataSource {
             "category": ApiStrings.category,
             "apiKey": ApiStrings.apiKey,
           });
-      return NewsData.fromJson(result);
+      return NewsDataModel.fromJson(result);
     } catch (_) {
-      rethrow;
+      throw ServerException();
     }
   }
 }
