@@ -1,37 +1,41 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:news_app/domain/usecases/get_list_news_use_case.dart';
 import 'package:news_app/presentation/bloc/news_list/news_list_event.dart';
 import 'package:news_app/presentation/bloc/news_list/news_list_state.dart';
-import 'package:news_app/data/datasource/remote/news_datasource.dart';
+import 'package:news_app/utils/usecase/usecase.dart';
 
 class NewsListBloc extends Bloc<NewsListEvent, NewsListState> {
-  final NewsDataSource newsDataSource;
+  final GetListNewsUseCase getListNewsUseCase;
 
   NewsListBloc({
-    required this.newsDataSource,
+    required this.getListNewsUseCase,
   }) : super(NewsListEmpty()) {
-    on<LoadNewsList>((_, emit) async {
-      try {
+    on<LoadNewsList>(
+      (_, emit) async {
         emit(NewsListLoading());
-        final result = await newsDataSource.getListNews();
+        final result = await getListNewsUseCase.call(const NoParams());
 
-        if (result.articles != null) {
-          emit(
-            NewsListHasData(
-              result.articles!,
+        result.fold(
+          (failure) => emit(
+            NewsListError(
+              failure.toString(),
             ),
-          );
-        } else {
-          emit(
-            NewsListEmpty(),
-          );
-        }
-      } catch (error) {
-        emit(
-          NewsListError(
-            error.toString(),
           ),
+          (result) {
+            if (result != null) {
+              emit(
+                NewsListHasData(
+                  result,
+                ),
+              );
+            } else {
+              emit(
+                NewsListEmpty(),
+              );
+            }
+          },
         );
-      }
-    });
+      },
+    );
   }
 }
