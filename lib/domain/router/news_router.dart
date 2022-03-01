@@ -1,10 +1,10 @@
-import 'package:news_app/data/model/news_data.dart';
+import 'package:news_app/domain/entity/news_entity.dart';
 import 'package:news_app/domain/router/news_routes.dart';
 import 'package:news_app/utils/navigation/navigation_helper.dart';
 
 abstract class NewsRouter {
   void navigateToDetailNews({
-    required Article article,
+    required NewsEntity newsEntity,
   });
 }
 
@@ -16,9 +16,11 @@ class NewsRouterImpl extends NewsRouter {
   });
 
   @override
-  void navigateToDetailNews({required Article article}) =>
+  void navigateToDetailNews({
+    required NewsEntity newsEntity,
+  }) =>
       navigationHelper.pushNamed(
         NewsRoutes.detailNews,
-        arguments: article,
+        arguments: newsEntity,
       );
 }

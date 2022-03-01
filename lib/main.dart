@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:news_app/domain/entity/news_entity.dart';
 import 'package:news_app/presentation/bloc/home/home_bloc.dart';
 import 'package:news_app/presentation/bloc/news_list/news_list_bloc.dart';
 import 'package:news_app/presentation/bloc/news_list/news_list_event.dart';
-import 'package:news_app/data/model/news_data.dart';
 import 'package:news_app/domain/router/news_routes.dart';
 import 'package:news_app/presentation/ui/home_page.dart';
 import 'package:news_app/utils/navigation/navigation_helper.dart';
@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
           ),
           BlocProvider<NewsListBloc>(
             create: (_) => NewsListBloc(
-              newsDataSource: di.locator(),
+              getListNewsUseCase: di.locator(),
             )..add(
                 const LoadNewsList(),
               ),
@@ -58,9 +58,9 @@ class MyApp extends StatelessWidget {
               case NewsRoutes.home:
                 return MaterialPageRoute(builder: (_) => const HomePage());
               case NewsRoutes.detailNews:
-                final article = settings.arguments as Article;
+                final newsEntity = settings.arguments as NewsEntity;
                 return MaterialPageRoute(
-                  builder: (_) => DetailNewsPage(article: article),
+                  builder: (_) => DetailNewsPage(newsEntity: newsEntity),
                   settings: settings,
                 );
               default:

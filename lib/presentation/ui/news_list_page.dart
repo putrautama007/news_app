@@ -20,7 +20,7 @@ class NewsListPage extends StatelessWidget {
           return NestedScrollView(
             headerSliverBuilder: (context, isScrolled) {
               return [
-                NewsAppBar(article: state.result[0]),
+                NewsAppBar(newsEntity: state.result[0]),
               ];
             },
             body: ListView.separated(
@@ -28,7 +28,7 @@ class NewsListPage extends StatelessWidget {
               shrinkWrap: true,
               itemCount: state.result.length,
               itemBuilder: (context, index) {
-                return NewsCard(article: state.result[index]);
+                return NewsCard(newsEntity: state.result[index]);
               },
             ),
           );

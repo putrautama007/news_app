@@ -1,17 +1,17 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:news_app/data/model/news_data.dart';
+import 'package:news_app/domain/entity/news_entity.dart';
 import 'package:news_app/domain/router/news_router.dart';
 import 'package:news_app/utils/navigation/navigation_helper.dart';
 
 class NewsAppBar extends StatelessWidget {
-  final Article article;
+  final NewsEntity newsEntity;
   final NewsRouter _newsRouter = NewsRouterImpl(
     navigationHelper: NavigationHelperImpl(),
   );
 
-  NewsAppBar({Key? key, required this.article}) : super(key: key);
+  NewsAppBar({Key? key, required this.newsEntity}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class NewsAppBar extends StatelessWidget {
       flexibleSpace: FlexibleSpaceBar(
         background: Column(
           children: [
-            article.urlToImage == null
+            newsEntity.urlToImage == null
                 ? SizedBox(
                     child: const Center(
                       child: Icon(Icons.error),
@@ -33,12 +33,12 @@ class NewsAppBar extends StatelessWidget {
                     children: [
                       GestureDetector(
                         onTap: () => _newsRouter.navigateToDetailNews(
-                          article: article,
+                          newsEntity: newsEntity,
                         ),
                         child: CachedNetworkImage(
                           height: 200.h,
                           width: 1.sw,
-                          imageUrl: article.urlToImage!,
+                          imageUrl: newsEntity.urlToImage!,
                           fit: BoxFit.cover,
                           placeholder: (context, url) => SizedBox(
                             child: const Center(
@@ -86,7 +86,7 @@ class NewsAppBar extends StatelessWidget {
               width: 1.sw,
               child: Center(
                 child: Text(
-                  article.title ?? "",
+                  newsEntity.title ?? "",
                   overflow: TextOverflow.ellipsis,
                   maxLines: 2,
                 ),
