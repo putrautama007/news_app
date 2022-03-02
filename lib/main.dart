@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:news_app/domain/entity/news_entity.dart';
-import 'package:news_app/presentation/bloc/home/home_bloc.dart';
-import 'package:news_app/presentation/bloc/news_list/news_list_bloc.dart';
-import 'package:news_app/presentation/bloc/news_list/news_list_event.dart';
-import 'package:news_app/domain/router/news_routes.dart';
-import 'package:news_app/presentation/ui/home_page.dart';
-import 'package:news_app/utils/navigation/navigation_helper.dart';
-import 'di/locator.dart' as di;
-import 'presentation/ui/detail_news_page.dart';
+import 'package:home/presentation/bloc/home/home_bloc.dart';
+import 'package:home/presentation/ui/home_page.dart';
+import 'package:navigation/navigation/navigation_helper.dart';
+import 'package:navigation/router/news_routes.dart';
+import 'package:news/domain/entity/news_entity.dart';
+import 'package:news_app/di/dependency.dart';
+import 'package:news_detail/presentation/ui/detail_news_page.dart';
+import 'package:news_list/presentation/bloc/news_list/news_list_bloc.dart';
+import 'package:news_list/presentation/bloc/news_list/news_list_event.dart';
+import 'package:shared_library/di/di.dart';
 
 void main() {
-  di.initDependency();
+  Dependency().initDependency();
   runApp(const MyApp());
 }
 
@@ -32,7 +33,7 @@ class MyApp extends StatelessWidget {
           ),
           BlocProvider<NewsListBloc>(
             create: (_) => NewsListBloc(
-              getListNewsUseCase: di.locator(),
+              getListNewsUseCase: locator(),
             )..add(
                 const LoadNewsList(),
               ),

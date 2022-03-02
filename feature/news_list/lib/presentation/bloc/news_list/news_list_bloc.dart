@@ -1,8 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:news_app/domain/usecases/get_list_news_use_case.dart';
-import 'package:news_app/presentation/bloc/news_list/news_list_event.dart';
-import 'package:news_app/presentation/bloc/news_list/news_list_state.dart';
-import 'package:news_app/utils/usecase/usecase.dart';
+import 'package:news/domain/usecases/get_list_news_use_case.dart';
+import 'package:news_list/presentation/bloc/news_list/news_list_event.dart';
+import 'package:news_list/presentation/bloc/news_list/news_list_state.dart';
+import 'package:shared_library/usecase/usecase.dart';
 
 class NewsListBloc extends Bloc<NewsListEvent, NewsListState> {
   final GetListNewsUseCase getListNewsUseCase;

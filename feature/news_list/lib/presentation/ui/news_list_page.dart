@@ -1,10 +1,10 @@
+import 'package:component/component/widget/appbar/news_appbar.dart';
+import 'package:component/component/widget/card/news_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:news_app/presentation/bloc/news_list/news_list_bloc.dart';
-import 'package:news_app/presentation/bloc/news_list/news_list_state.dart';
-import 'package:news_app/presentation/widget/appbar/news_appbar.dart';
-import 'package:news_app/presentation/widget/card/news_card.dart';
+import 'package:news_list/presentation/bloc/news_list/news_list_bloc.dart';
+import 'package:news_list/presentation/bloc/news_list/news_list_state.dart';
 
 class NewsListPage extends StatelessWidget {
   const NewsListPage({Key? key}) : super(key: key);

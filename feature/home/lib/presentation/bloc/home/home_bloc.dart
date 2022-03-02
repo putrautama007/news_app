@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:news_app/presentation/bloc/home/home_event.dart';
+import 'package:home/presentation/bloc/home/home_event.dart';
 
 class HomeBloc extends Bloc<HomeEvent, int> {
   HomeBloc({

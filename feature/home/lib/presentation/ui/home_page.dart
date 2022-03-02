@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:news_app/presentation/bloc/home/home_bloc.dart';
-import 'package:news_app/presentation/bloc/home/home_event.dart';
-import 'package:news_app/presentation/ui/favorite_news_page.dart';
-import 'package:news_app/presentation/ui/news_list_page.dart';
-import 'package:news_app/utils/strings/strings%20constants.dart';
+import 'package:home/presentation/bloc/home/home_bloc.dart';
+import 'package:home/presentation/bloc/home/home_event.dart';
+import 'package:news_favorite/presentation/ui/favorite_news_page.dart';
+import 'package:news_list/presentation/ui/news_list_page.dart';
+import 'package:resources/resources.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);

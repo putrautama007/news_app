@@ -1,7 +1,7 @@
 name: home
 description: A new Flutter package project.
 version: 0.0.1
-homepage:
+publish_to: none
 
 environment:
   sdk: ">=2.16.1 <3.0.0"
@@ -10,6 +10,14 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  news_favorite:
+    path: ../news_favorite
+  news_list:
+    path: ../news_list
+  resources:
+    path: ../../resource/resources
+  shared_library:
+    path: ../../shared_library/shared_library
 
 dev_dependencies:
   flutter_test:

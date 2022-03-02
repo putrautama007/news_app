@@ -1,7 +1,7 @@
 name: news_detail
 description: A new Flutter package project.
 version: 0.0.1
-homepage:
+publish_to: none
 
 environment:
   sdk: ">=2.16.1 <3.0.0"
@@ -10,6 +10,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  news:
+    path: ../../domain/news
+  shared_library:
+    path: ../../shared_library/shared_library
 
 dev_dependencies:
   flutter_test:
