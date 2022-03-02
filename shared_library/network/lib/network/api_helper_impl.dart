@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:news_app/utils/network/api_helper.dart';
-import 'package:news_app/utils/strings/api_strings.dart';
+import 'package:network/network/api_helper.dart';
+import 'package:resources/resources.dart';
 
 class ApiHelperImpl extends ApiHelper {
   final Dio dio;
