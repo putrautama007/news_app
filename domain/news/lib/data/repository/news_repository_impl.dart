@@ -1,13 +1,13 @@
 import 'dart:io';
 
 import 'package:dartz/dartz.dart';
-import 'package:news_app/data/datasource/remote/news_datasource.dart';
-import 'package:news_app/data/mapper/news_mapper.dart';
-import 'package:news_app/domain/entity/news_entity.dart';
-import 'package:news_app/domain/repository/news_repository.dart';
-import 'package:news_app/utils/failure/exception.dart';
-import 'package:news_app/utils/failure/failure.dart';
-import 'package:news_app/utils/strings/error_strings.dart';
+import 'package:news/data/datasource/remote/news_datasource.dart';
+import 'package:news/data/mapper/news_mapper.dart';
+import 'package:news/domain/entity/news_entity.dart';
+import 'package:news/domain/repository/news_repository.dart';
+import 'package:resources/resources.dart';
+import 'package:shared_library/failure/exception.dart';
+import 'package:shared_library/failure/failure.dart';
 
 class NewsRepositoryImpl extends NewsRepository {
   final NewsDataSource newsDataSource;

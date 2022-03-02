@@ -1,7 +1,9 @@
-import 'package:news_app/data/model/news_data_model.dart';
-import 'package:news_app/utils/failure/exception.dart';
-import 'package:news_app/utils/network/api_helper.dart';
-import 'package:news_app/utils/strings/api_strings.dart';
+
+
+import 'package:network/network/api_helper.dart';
+import 'package:news/data/model/news_data_model.dart';
+import 'package:resources/resources.dart';
+import 'package:shared_library/failure/exception.dart';
 
 class NewsDataSource {
   final ApiHelper apiHelper;

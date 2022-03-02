@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
-import 'package:news_app/domain/entity/news_entity.dart';
-import 'package:news_app/domain/repository/news_repository.dart';
-import 'package:news_app/utils/failure/failure.dart';
-import 'package:news_app/utils/usecase/usecase.dart';
+import 'package:news/domain/entity/news_entity.dart';
+import 'package:news/domain/repository/news_repository.dart';
+import 'package:shared_library/failure/failure.dart';
+import 'package:shared_library/usecase/usecase.dart';
 
 class GetListNewsUseCase extends UseCase<List<NewsEntity>?, NoParams> {
   final NewsRepository newsRepository;

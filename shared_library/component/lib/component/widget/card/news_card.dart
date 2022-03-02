@@ -1,15 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
-import 'package:news_app/domain/entity/news_entity.dart';
-import 'package:news_app/domain/router/news_router.dart';
-import 'package:news_app/utils/navigation/navigation_helper.dart';
+import 'package:navigation/router/news_router.dart';
+import 'package:news/domain/entity/news_entity.dart';
+import 'package:shared_library/di/di.dart';
 
 class NewsCard extends StatelessWidget {
   final NewsEntity newsEntity;
-  final NewsRouter _newsRouter = NewsRouterImpl(
-    navigationHelper: NavigationHelperImpl(),
-  );
+  final NewsRouter _newsRouter = locator();
 
   NewsCard({Key? key, required this.newsEntity}) : super(key: key);
 
