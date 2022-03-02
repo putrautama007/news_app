@@ -56,6 +56,8 @@ dependencies:
   # Shared Library
   component:
     path: shared_library/component
+  local_database:
+    path: shared_library/local_database
   navigation:
     path: shared_library/navigation
   network:
