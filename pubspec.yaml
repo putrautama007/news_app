@@ -34,13 +34,34 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
-  cached_network_image: ^3.2.0
-  dartz: ^0.10.1
-  dio: ^4.0.4
-  equatable: ^2.0.3
-  get_it: ^7.2.0
-  flutter_bloc: ^8.0.1
-  flutter_screenutil: ^5.3.1
+
+  # Domain
+  news:
+    path: domain/news
+
+  # Feature
+  home:
+    path: feature/home
+  news_detail:
+    path: feature/news_detail
+  news_favorite:
+    path: feature/news_favorite
+  news_list:
+    path: feature/news_list
+
+  # Resource
+  resources:
+    path: resource/resources
+
+  # Shared Library
+  component:
+    path: shared_library/component
+  navigation:
+    path: shared_library/navigation
+  network:
+    path: shared_library/network
+  shared_library:
+    path: shared_library/shared_library
 
 dev_dependencies:
   flutter_test:
