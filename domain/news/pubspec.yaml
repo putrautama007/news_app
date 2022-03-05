@@ -16,6 +16,8 @@ dependencies:
     path: ../../shared_library/network
   shared_library:
     path: ../../shared_library/shared_library
+  local_database:
+    path: ../../shared_library/local_database
 
 dev_dependencies:
   flutter_test:
