@@ -12,7 +12,7 @@ class NewsMapper {
         url: article.url ?? "",
         urlToImage: article.urlToImage ?? "",
         publishedAt: article.publishedAt,
-    description: article.description ?? "",
-    content: article.content ?? "",
+        description: article.description ?? "",
+        content: article.content ?? "",
       );
 }
