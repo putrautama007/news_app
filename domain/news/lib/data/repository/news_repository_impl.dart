@@ -25,7 +25,7 @@ class NewsRepositoryImpl extends NewsRepository {
       return Right(
         result.articles!
             .map(
-              (model) => newsMapper.mapNewsEntityToNewsDataModel(
+              (model) => newsMapper.mapNewsDataModelToNewsEntity(
                 model,
               ),
             )

@@ -1,10 +1,8 @@
-
-
 import 'package:news/data/model/news_data_model.dart';
 import 'package:news/domain/entity/news_entity.dart';
 
 class NewsMapper {
-  NewsEntity mapNewsEntityToNewsDataModel(Article article) => NewsEntity(
+  NewsEntity mapNewsDataModelToNewsEntity(Article article) => NewsEntity(
         source: NewsSource(
           id: article.source?.id ?? "",
           name: article.source?.name ?? "",
@@ -14,5 +12,7 @@ class NewsMapper {
         url: article.url ?? "",
         urlToImage: article.urlToImage ?? "",
         publishedAt: article.publishedAt,
+        description: article.description ?? "",
+        content: article.content ?? "",
       );
 }
