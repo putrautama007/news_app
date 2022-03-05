@@ -1,7 +1,8 @@
 import 'dart:io';
 
 import 'package:dartz/dartz.dart';
-import 'package:news/data/datasource/remote/news_datasource.dart';
+import 'package:news/data/datasource/local/news_local_datasource.dart';
+import 'package:news/data/datasource/remote/news_remote_datasource.dart';
 import 'package:news/data/mapper/news_mapper.dart';
 import 'package:news/domain/entity/news_entity.dart';
 import 'package:news/domain/repository/news_repository.dart';
@@ -10,22 +11,24 @@ import 'package:shared_library/failure/exception.dart';
 import 'package:shared_library/failure/failure.dart';
 
 class NewsRepositoryImpl extends NewsRepository {
-  final NewsDataSource newsDataSource;
+  final NewsRemoteDataSource newsRemoteDataSource;
   final NewsMapper newsMapper;
+  final NewsLocalDataSource newsLocalDataSource;
 
   NewsRepositoryImpl({
-    required this.newsDataSource,
+    required this.newsRemoteDataSource,
     required this.newsMapper,
+    required this.newsLocalDataSource,
   });
 
   @override
   Future<Either<Failure, List<NewsEntity>>> getListNews() async {
     try {
-      final result = await newsDataSource.getListNews();
+      final result = await newsRemoteDataSource.getListNews();
       return Right(
         result.articles!
             .map(
-              (model) => newsMapper.mapNewsEntityToNewsDataModel(
+              (model) => newsMapper.mapNewsDataModelToNewsEntity(
                 model,
               ),
             )
@@ -39,6 +42,48 @@ class NewsRepositoryImpl extends NewsRepository {
           ErrorStrings.connectionFailure,
         ),
       );
+    }
+  }
+
+  @override
+  Future<Either<Failure, bool>> deleteNews(NewsEntity entity) async {
+    try {
+      await newsLocalDataSource.deleteNews(
+        newsMapper.mapNewsEntityToNewsTableData(entity),
+      );
+      return const Right(true);
+    } on ServerException {
+      return const Left(LocalDataBaseFailure('Failed to delete news'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<NewsEntity>>> getAllBookMarkNews() async {
+    try {
+      final result = await newsLocalDataSource.getAllBookMarkNews();
+      return Right(
+        result
+            .map(
+              (model) => newsMapper.mapNewsTableDataToNewsEntity(
+                model,
+              ),
+            )
+            .toList(),
+      );
+    } on ServerException {
+      return const Left(LocalDataBaseFailure('Failed to load news'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, bool>> insertNews(NewsEntity entity) async {
+    try {
+      await newsLocalDataSource.insertNews(
+        newsMapper.mapNewsEntityToNewsTableData(entity),
+      );
+      return const Right(true);
+    } on ServerException {
+      return const Left(LocalDataBaseFailure('Failed to save news'));
     }
   }
 }

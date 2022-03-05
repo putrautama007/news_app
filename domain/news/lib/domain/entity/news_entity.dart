@@ -10,6 +10,7 @@ class NewsEntity extends Equatable {
     this.urlToImage,
     this.publishedAt,
     this.content,
+    this.isBookMarked = false,
   });
 
   final NewsSource? source;
@@ -20,6 +21,7 @@ class NewsEntity extends Equatable {
   final String? urlToImage;
   final DateTime? publishedAt;
   final String? content;
+  final bool isBookMarked;
 
   @override
   List<Object?> get props => [

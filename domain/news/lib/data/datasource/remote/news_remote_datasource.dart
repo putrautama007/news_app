@@ -5,10 +5,10 @@ import 'package:news/data/model/news_data_model.dart';
 import 'package:resources/resources.dart';
 import 'package:shared_library/failure/exception.dart';
 
-class NewsDataSource {
+class NewsRemoteDataSource {
   final ApiHelper apiHelper;
 
-  NewsDataSource({
+  NewsRemoteDataSource({
     required this.apiHelper,
   });
 

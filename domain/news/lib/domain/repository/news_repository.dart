@@ -4,4 +4,10 @@ import 'package:shared_library/failure/failure.dart';
 
 abstract class NewsRepository {
   Future<Either<Failure, List<NewsEntity>>> getListNews();
+
+  Future<Either<Failure, bool>> insertNews(NewsEntity entity);
+
+  Future<Either<Failure, bool>> deleteNews(NewsEntity entity);
+
+  Future<Either<Failure, List<NewsEntity>>> getAllBookMarkNews();
 }

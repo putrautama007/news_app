@@ -16,3 +16,7 @@ class ServerFailure extends Failure {
 class ConnectionFailure extends Failure {
   const ConnectionFailure(String message) : super(message);
 }
+
+class LocalDataBaseFailure extends Failure {
+  const LocalDataBaseFailure(String message) : super(message);
+}
