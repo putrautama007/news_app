@@ -55,5 +55,10 @@ class NewsDependency {
         newsRepository: locator(),
       ),
     );
+    locator.registerLazySingleton<GetBookmarkNewsUseCase>(
+          () => GetBookmarkNewsUseCase(
+        newsRepository: locator(),
+      ),
+    );
   }
 }

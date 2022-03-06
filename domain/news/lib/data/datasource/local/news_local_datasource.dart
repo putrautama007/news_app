@@ -32,4 +32,13 @@ class NewsLocalDataSource {
       throw DatabaseException(error.toString());
     }
   }
+
+  Future<NewsTableData> getBookmarkedByUrl(String url) async {
+    try {
+      final result = await appDatabase.newsDao.getBookmarkedByUrl(url);
+      return result;
+    } catch (error) {
+      throw DatabaseException(error.toString());
+    }
+  }
 }

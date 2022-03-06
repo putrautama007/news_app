@@ -10,4 +10,6 @@ abstract class NewsRepository {
   Future<Either<Failure, bool>> deleteNews(NewsEntity entity);
 
   Future<Either<Failure, List<NewsEntity>>> getAllBookMarkNews();
+
+  Future<Either<Failure, NewsEntity>> getBookmarkedByUrl(String url);
 }

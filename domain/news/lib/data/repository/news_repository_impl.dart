@@ -86,4 +86,18 @@ class NewsRepositoryImpl extends NewsRepository {
       return const Left(LocalDataBaseFailure('Failed to save news'));
     }
   }
+
+  @override
+  Future<Either<Failure, NewsEntity>> getBookmarkedByUrl(String url) async {
+    try {
+      final result = await newsLocalDataSource.getBookmarkedByUrl(
+        url,
+      );
+      return Right(newsMapper.mapNewsTableDataToNewsEntity(result));
+    } on ServerException {
+      return const Left(
+        LocalDataBaseFailure('Failed to get news'),
+      );
+    }
+  }
 }
