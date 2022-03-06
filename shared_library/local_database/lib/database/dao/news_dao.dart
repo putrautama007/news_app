@@ -14,4 +14,7 @@ class NewsDao extends DatabaseAccessor<AppDatabase> with _$NewsDaoMixin {
   Future<List<NewsTableData>> getAllNews() => select(newsTable).get();
 
   Future deleteNews(NewsTableData data) => delete(newsTable).delete(data);
+
+  Future<NewsTableData> getBookmarkedByUrl(String url) =>
+      (select(newsTable)..where((tbl) => tbl.url.equals(url))).getSingle();
 }
