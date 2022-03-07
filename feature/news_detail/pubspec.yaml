@@ -12,8 +12,12 @@ dependencies:
     sdk: flutter
   news:
     path: ../../domain/news
+  component:
+    path: ../../shared_library/component
   shared_library:
     path: ../../shared_library/shared_library
+  news_favorite:
+    path: ../news_favorite
 
 dev_dependencies:
   flutter_test:

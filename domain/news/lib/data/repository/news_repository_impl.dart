@@ -52,7 +52,7 @@ class NewsRepositoryImpl extends NewsRepository {
         newsMapper.mapNewsEntityToNewsTableData(entity),
       );
       return const Right(true);
-    } on ServerException {
+    } on DatabaseException {
       return const Left(LocalDataBaseFailure('Failed to delete news'));
     }
   }
@@ -70,7 +70,7 @@ class NewsRepositoryImpl extends NewsRepository {
             )
             .toList(),
       );
-    } on ServerException {
+    } on DatabaseException {
       return const Left(LocalDataBaseFailure('Failed to load news'));
     }
   }
@@ -82,7 +82,7 @@ class NewsRepositoryImpl extends NewsRepository {
         newsMapper.mapNewsEntityToNewsTableData(entity),
       );
       return const Right(true);
-    } on ServerException {
+    } on DatabaseException {
       return const Left(LocalDataBaseFailure('Failed to save news'));
     }
   }

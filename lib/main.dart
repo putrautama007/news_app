@@ -10,6 +10,8 @@ import 'package:news_app/di/dependency.dart';
 import 'package:news_detail/presentation/bloc/news_detail_bloc.dart';
 import 'package:news_detail/presentation/bloc/news_detail_event.dart';
 import 'package:news_detail/presentation/ui/detail_news_page.dart';
+import 'package:news_favorite/presentation/bloc/news_favorite_bloc.dart';
+import 'package:news_favorite/presentation/bloc/news_favorite_event.dart';
 import 'package:news_list/presentation/bloc/news_list/news_list_bloc.dart';
 import 'package:news_list/presentation/bloc/news_list/news_list_event.dart';
 import 'package:shared_library/di/di.dart';
@@ -39,6 +41,13 @@ class MyApp extends StatelessWidget {
             )..add(
                 const LoadNewsList(),
               ),
+          ),
+          BlocProvider<NewsFavoriteBloc>(
+            create: (_) => NewsFavoriteBloc(
+              getBookmarkNewsUseCase: locator(),
+            )..add(
+              const LoadNewsFavorite(),
+            ),
           ),
         ],
         child: MaterialApp(

@@ -10,6 +10,14 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  component:
+    path: ../../shared_library/component
+  news:
+    path: ../../domain/news
+  resources:
+    path: ../../resource/resources
+  shared_library:
+    path: ../../shared_library/shared_library
 
 dev_dependencies:
   flutter_test:
