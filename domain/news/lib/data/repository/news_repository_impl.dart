@@ -94,7 +94,7 @@ class NewsRepositoryImpl extends NewsRepository {
         url,
       );
       return Right(newsMapper.mapNewsTableDataToNewsEntity(result));
-    } on ServerException {
+    } on DatabaseException {
       return const Left(
         LocalDataBaseFailure('Failed to get news'),
       );

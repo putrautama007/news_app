@@ -7,6 +7,8 @@ import 'package:navigation/navigation/navigation_helper.dart';
 import 'package:navigation/router/news_routes.dart';
 import 'package:news/domain/entity/news_entity.dart';
 import 'package:news_app/di/dependency.dart';
+import 'package:news_detail/presentation/bloc/news_detail_bloc.dart';
+import 'package:news_detail/presentation/bloc/news_detail_event.dart';
 import 'package:news_detail/presentation/ui/detail_news_page.dart';
 import 'package:news_list/presentation/bloc/news_list/news_list_bloc.dart';
 import 'package:news_list/presentation/bloc/news_list/news_list_event.dart';
@@ -61,7 +63,16 @@ class MyApp extends StatelessWidget {
               case NewsRoutes.detailNews:
                 final newsEntity = settings.arguments as NewsEntity;
                 return MaterialPageRoute(
-                  builder: (_) => DetailNewsPage(newsEntity: newsEntity),
+                  builder: (_) => BlocProvider<NewsDetailBloc>(
+                    create: (_) => NewsDetailBloc(
+                      getBookmarkedNewsByUrlUseCase: locator(),
+                      saveNewsUseCase: locator(),
+                      deleteNewsUseCase: locator(),
+                    )..add(
+                        CheckBookmarkNewsStatus(url: newsEntity.url!),
+                      ),
+                    child: DetailNewsPage(newsEntity: newsEntity),
+                  ),
                   settings: settings,
                 );
               default:

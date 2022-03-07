@@ -1,9 +1,11 @@
+import 'package:news/data/datasource/local/news_local_datasource.dart';
 import 'package:news/data/datasource/remote/news_remote_datasource.dart';
 import 'package:news/data/mapper/news_mapper.dart';
 import 'package:news/data/repository/news_repository_impl.dart';
 import 'package:news/domain/repository/news_repository.dart';
 import 'package:news/domain/usecases/delete_news_use_case.dart';
 import 'package:news/domain/usecases/get_bookmark_news_use_case.dart';
+import 'package:news/domain/usecases/get_bookmarked_news_by_url_use_case.dart';
 import 'package:news/domain/usecases/get_list_news_use_case.dart';
 import 'package:news/domain/usecases/save_news_use_case.dart';
 import 'package:shared_library/di/di.dart';
@@ -16,11 +18,19 @@ class NewsDependency {
     _useCase();
   }
 
-  void _dataSource() => locator.registerLazySingleton<NewsRemoteDataSource>(
-        () => NewsRemoteDataSource(
-          apiHelper: locator(),
-        ),
-      );
+  void _dataSource() {
+    locator.registerLazySingleton<NewsRemoteDataSource>(
+      () => NewsRemoteDataSource(
+        apiHelper: locator(),
+      ),
+    );
+
+    locator.registerLazySingleton<NewsLocalDataSource>(
+      () => NewsLocalDataSource(
+        appDatabase: locator(),
+      ),
+    );
+  }
 
   void _repository() => locator.registerLazySingleton<NewsRepository>(
         () => NewsRepositoryImpl(
@@ -55,8 +65,8 @@ class NewsDependency {
         newsRepository: locator(),
       ),
     );
-    locator.registerLazySingleton<GetBookmarkNewsUseCase>(
-          () => GetBookmarkNewsUseCase(
+    locator.registerLazySingleton<GetBookmarkedNewsByUrlUseCase>(
+      () => GetBookmarkedNewsByUrlUseCase(
         newsRepository: locator(),
       ),
     );
