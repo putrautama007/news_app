@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:news_app/bloc/home/home_bloc.dart';
-import 'package:news_app/bloc/home/home_event.dart';
+import 'package:news_app/bloc/home/home_cubit.dart';
+import 'package:news_app/bloc/home/home_state.dart';
 import 'package:news_app/ui/favorite_news_page.dart';
 import 'package:news_app/ui/news_list_page.dart';
 import 'package:news_app/utils/strings/strings%20constants.dart';
@@ -11,14 +11,14 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<HomeBloc, int>(
+    return BlocBuilder<HomeCubit, HomeState>(
       builder: (context, state) {
         return Scaffold(
           body: SizedBox(
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
             child: IndexedStack(
-              index: context.read<HomeBloc>().state,
+              index: context.read<HomeCubit>().state.state,
               children: const [
                 NewsListPage(),
                 FavoriteNewsPage(),
@@ -39,9 +39,9 @@ class HomePage extends StatelessWidget {
               showUnselectedLabels: true,
               showSelectedLabels: true,
               onTap: (value) {
-                context.read<HomeBloc>().add(ChangeTabEvent(state: value));
+                context.read<HomeCubit>().changeTab(tabIndex: value);
               },
-              currentIndex: context.read<HomeBloc>().state,
+              currentIndex: context.read<HomeCubit>().state.state,
               type: BottomNavigationBarType.fixed,
               items: const <BottomNavigationBarItem>[
                 BottomNavigationBarItem(

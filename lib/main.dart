@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:news_app/bloc/home/home_bloc.dart';
+import 'package:news_app/bloc/home/home_cubit.dart';
 import 'package:news_app/bloc/news_list/news_list_bloc.dart';
 import 'package:news_app/bloc/news_list/news_list_event.dart';
 import 'package:news_app/data/datasource/remote/news_datasource.dart';
@@ -27,10 +27,8 @@ class MyApp extends StatelessWidget {
       designSize: const Size(360, 690),
       builder: () => MultiBlocProvider(
         providers: [
-          BlocProvider<HomeBloc>(
-            create: (_) => HomeBloc(
-              initialState: 0,
-            ),
+          BlocProvider<HomeCubit>(
+            create: (_) => HomeCubit(),
           ),
           BlocProvider<NewsListBloc>(
             create: (_) => NewsListBloc(
