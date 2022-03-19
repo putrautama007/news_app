@@ -12,7 +12,7 @@ class NewsEntity extends Equatable {
     this.content,
   });
 
-  final NewsSource? source;
+  final NewsSourceEntity? source;
   final String? author;
   final String? title;
   final String? description;
@@ -34,8 +34,8 @@ class NewsEntity extends Equatable {
       ];
 }
 
-class NewsSource extends Equatable {
-  const NewsSource({
+class NewsSourceEntity extends Equatable {
+  const NewsSourceEntity({
     this.id,
     this.name,
   });
