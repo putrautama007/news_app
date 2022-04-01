@@ -20,7 +20,7 @@ void testNewsListBloc() {
     _mockGetListNewsUseCase = MockGetListNewsUseCase();
   });
 
-  group('HomeBloc', () {
+  group('NewsListBloc', () {
     blocTest(
       'emits [] when nothing is added',
       build: () => NewsListBloc(getListNewsUseCase: _mockGetListNewsUseCase),
